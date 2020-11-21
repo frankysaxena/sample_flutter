@@ -7,18 +7,47 @@ import 'package:flutter/cupertino.dart';
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return MyAppState();
+  }
+}
+
+class MyAppState extends State<MyApp> {
+  @override
+  var questionId = 0;
+
+  void questionIdchange() {
+    setState(() {
+      questionId += 1;
+    });
+    print(questionId);
+  }
+
   @override
   Widget build(BuildContext context) {
+    var questions = [
+      'Question 1: Name?',
+      'Question 2: Age?',
+      'Question 3: Comments?'
+    ];
+
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
           title: Text('My App Testing'),
         ),
-        body: Text("Example of body text "),
-        floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.airplay_rounded),
-          onPressed: () {},
+        body: Column(
+          children: [
+            Text(questions[questionId]),
+            RaisedButton(
+                child: Text('Press me'),
+                onPressed: () {
+                  print('button pressed');
+                  questionIdchange();
+                }),
+          ],
         ),
       ),
     );
